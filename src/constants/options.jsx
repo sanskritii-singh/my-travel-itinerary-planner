@@ -50,4 +50,4 @@ export const SelectBudgetOptions=[
         icon:'💸'
     }
 ]
-export const AI_PROMPT='Generate Trvael Plan for Location : {Location}'
+export const AI_PROMPT='Generate Trvael Plan for Location : {location} for {totalDays} for {travellers} with a {budget} budget,give me Hotels options list with HotelName, Hotel address, Price, hotel image url,Geo Coordinates, ticket Pricing, rating.Time travel each of the location for {totalDays} days  with each day plan with best time to visit in JSON format. '
