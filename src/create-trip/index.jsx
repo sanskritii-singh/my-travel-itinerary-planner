@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/alert-dialog"
 import { FcGoogle } from "react-icons/fc";
 import { useGoogleLogin } from "@react-oauth/google";
+import axios from 'axios';
 
 function CreateTrip() {
   const [place, setPlace] = useState();
@@ -44,8 +45,9 @@ function CreateTrip() {
     },[formData])
 
   const login =useGoogleLogin({
-    onSuccess:(codeResp)=>console.log(codeResp),
-    onError:(error)=>console.log(error)
+    onSuccess:(codeResp)=>GetUserProfile(codeResp),
+    onError:(error)=>console.log(error),
+    scope: 'openid profile email',
   })
   
   const OnGenerateTrip=async()=>{
@@ -55,7 +57,7 @@ function CreateTrip() {
       setOpenDialog(true)
       return ;
     }
-
+    
 
     if(formData?.noOfDays>5&&!formData?.location||!formData?.budget||!formData?.travellers)
     {
@@ -74,7 +76,20 @@ function CreateTrip() {
     console.log(result?.response?.text());
     
   }
-  
+  const GetUserProfile=(tokenInfo)=>{
+    axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${tokenInfo?.access_token}`,{
+      headers:{
+        Authorization:`Bearer ${tokenInfo?.access_token}`,
+        Accept:'Application/json'
+      }
+    }).then((resp)=>{
+      console.log(resp);
+      localStorage.setItem('user',JSON.stringify(resp.data));
+
+      setOpenDialog(false);
+      OnGenerateTrip();
+    })
+  }
   return (
     <div className="sm:px-10 md:px-32 lg:px-56 xl:px-10 px-5 mt-10">
       <h2 className="font-bold text-3xl">Tell us your travel preference 🏕️🌴</h2>
@@ -103,7 +118,7 @@ function CreateTrip() {
           <h2 className="text-xl my-3 font-bold">
             How many days are you planning to stay?
           </h2>
-          <Input placeholder={"Example: 3"} type={"number"} min="1"
+          <Input placeholder={"Example: 3"} type={"number"} min="1" max="5"
           onChange={(e)=>handleInputChange('noofDays',e.target.value)} />
         </div>
       </div>
