@@ -37,7 +37,7 @@ The response? A beautiful, structured day-by-day plan that feels human-curated, 
 - 🧠 **Gemini AI Integration**  
   Prompts are custom-generated and parsed for realistic outputs — not generic lists.
 
-- 🔐 **Firebase Authentication **  
+- 🔐 **Firebase Authentication**  
   Let users sign in and save their travel itineraries.
 
 - 📂 **Real-Time Itinerary Storage**  
@@ -60,7 +60,9 @@ The response? A beautiful, structured day-by-day plan that feels human-curated, 
 
 ---
 
-🛠️ How It Works (Under the Hood)
+🛠️ How It Works (Under the Hood):
+
+
 User Input
 Destination, trip duration, and group size are collected via a clean form.
 
