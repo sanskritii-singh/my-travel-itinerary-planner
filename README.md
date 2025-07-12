@@ -56,7 +56,7 @@ The response? A beautiful, structured day-by-day plan that feels human-curated, 
 | AI               | Google Gemini API                          |
 | Backend / DB     | Firebase Firestore                         |
 | Authentication   | Firebase Auth                              |
-               |
+               
 
 ---
 
